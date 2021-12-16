@@ -5,14 +5,16 @@ using Cinemachine;
 
 public class CameraMovement : MonoBehaviour
 {
+    
+
     public FixedJoystick _joystickRight;
 
-    private CinemachineFreeLook _cmFL;
+    public CinemachineFreeLook _cmFL;
 
 
     void Start()
     {
-        _cmFL = transform.GetComponent<CinemachineFreeLook>();
+        //_cmFL = transform.GetComponent<CinemachineFreeLook>();
     }
 
     private void FixedUpdate()
@@ -22,8 +24,6 @@ public class CameraMovement : MonoBehaviour
 
     private void jsMove()
     {
-        
-        Debug.Log(_joystickRight.Vertical);
         _cmFL.m_YAxis.Value += _joystickRight.Vertical * Time.deltaTime * 0.2f;
         _cmFL.m_XAxis.Value += _joystickRight.Horizontal;
     }

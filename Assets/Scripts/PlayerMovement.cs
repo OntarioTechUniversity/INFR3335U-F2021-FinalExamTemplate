@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
    
     public Transform _ControlConnect; // Connector
+
+    public GameObject _player;
     
     private float rotAng;
     private RaycastHit rayCout;
@@ -19,17 +21,22 @@ public class PlayerMovement : MonoBehaviour
 
     private Camera _camera;
 
+    private Transform _cmfl;
+
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _joystickLeft = _ControlConnect.GetChild(0).GetChild(0).GetComponent<FixedJoystick>();
         //_joystickRight = _ControlConnect.GetChild(0).GetChild(1).GetComponent<FixedJoystick>();
         _camera = _ControlConnect.GetChild(1).GetComponent<Camera>();
+        _cmfl = _ControlConnect.GetChild(2);
+        _cmfl.GetComponent<Cinemachine.CinemachineFreeLook>().Follow = _player.transform;
+        _cmfl.GetComponent<Cinemachine.CinemachineFreeLook>().LookAt = _player.transform.GetChild(2);
     }
 
-    private void FixedUpdate()
+    void Update()
     {
-        transform.rotation = Quaternion.Euler(0, _camera.transform.rotation.eulerAngles.y + rotAng, 0);
+        _player.transform.rotation = Quaternion.Euler(0, _camera.transform.rotation.eulerAngles.y + rotAng, 0);
 
 
         countDown();
@@ -43,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
             if(jsMove(false))
             {
                 
-                _characterController.Move(transform.forward * Time.deltaTime);
+                _characterController.Move(_player.transform.forward * Time.deltaTime);
 
             }
             
@@ -62,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isCollidingVertically(bool isDebugging)
     {
-        Physics.Raycast(transform.position, Vector3.down, out rayCout);
+        Physics.Raycast(_player.transform.position, Vector3.down, out rayCout);
 
         if (isDebugging)
             Debug.Log("rayCout.distance: " + rayCout.distance);
