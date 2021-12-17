@@ -82,49 +82,6 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    #region KEY MOVE
-    private void getKeyRotation(bool isDebugging)
-    {
-        if (Input.GetKey(KeyCode.A))
-            rotAng = 270;
-
-        if (Input.GetKey(KeyCode.D))
-            rotAng = 90;
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            rotAng = 0;
-            rotAng += (Input.GetKey(KeyCode.D)) ? 45 : 0;
-            rotAng += (Input.GetKey(KeyCode.A)) ? -45 : 0;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rotAng = 180;
-            rotAng += (Input.GetKey(KeyCode.D)) ? -45 : 0;
-            rotAng += (Input.GetKey(KeyCode.A)) ? 45 : 0;
-        }
-
-        if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.A))
-            rotAng = 0;
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S))
-            rotAng = 0;
-
-        if (isDebugging)
-            Debug.Log("rotAng: " + rotAng);
-    }
-
-    private bool isPressingWASD()
-    {
-        if (Input.GetKey(KeyCode.W)
-            || Input.GetKey(KeyCode.A)
-            || Input.GetKey(KeyCode.S)
-            || Input.GetKey(KeyCode.D))
-        {
-            return true;
-        }
-        return false;
-    }
-    #endregion
 
     private bool jsMove(bool isDebugging)
     {

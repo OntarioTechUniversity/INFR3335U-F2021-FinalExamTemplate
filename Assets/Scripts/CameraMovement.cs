@@ -5,17 +5,9 @@ using Cinemachine;
 
 public class CameraMovement : MonoBehaviour
 {
-    
-
     public FixedJoystick _joystickRight;
 
     public CinemachineFreeLook _cmFL;
-
-
-    void Start()
-    {
-        //_cmFL = transform.GetComponent<CinemachineFreeLook>();
-    }
 
     private void FixedUpdate()
     {
